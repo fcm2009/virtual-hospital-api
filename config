@@ -1,0 +1,8 @@
+{
+  host: "virtualhospital.database.windows.net",
+  database: "virtualhospitalDB",
+  user: "SWE418-VH",
+  pass: "VH@20155",
+  dialect: "mssql",
+  port: 1433
+  }
