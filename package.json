@@ -1,0 +1,29 @@
+{
+  "name": "virtual-hospital",
+  "version": "1.0.0",
+  "description": "virtual hospital api",
+  "start": "node ./bin/www",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fcm2009/virtual-hospital.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fcm2009/virtual-hospital/issues"
+  },
+  "homepage": "https://github.com/fcm2009/virtual-hospital#readme",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "hat": "git+https://github.com/substack/node-hat.git",
+    "jsonwebtoken": "^5.7.0",
+    "morgan": "^1.7.0",
+    "passport": "^0.3.2",
+    "passport-http-bearer": "^1.0.1",
+    "passport-local": "^1.0.0"
+  }
+}
