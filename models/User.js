@@ -1,76 +1,67 @@
-var sequelize = require('../app').sequelize;
-var Sequelize = require('sequelize');
-var HealthRecord = require("./HealthRecord")
 
-var user = sequelize.define('dbo.User', {
-  id: {
-    type: Sequelize.STRING,
-    field: "Id",
-    primaryKey: true
-  },
-  firstName: {
-    type: Sequelize.STRING,
-    field: "FirstName"
-  },
-  lastName: {
-    type: Sequelize.STRING,
-    field: "LastName"
-  },
-  mobileNumber: {
-    type: Sequelize.STRING,
-    field: "MobileNumber"
-  },
-  email: {
-    type: Sequelize.STRING,
-    field: "Email"
-  },
-  isEmailConfirmed: {
-    type: Sequelize.BOOLEAN,
-    field: "EmailConfirmed"
-  },
-  passwordHash: {
-    type: Sequelize.STRING,
-    field: "PasswordHash"
-  },
-  securityStamp: {
-    type: Sequelize.STRING,
-    field: "SecurityStamp"
-  },
-  phoneNumber: {
-    type: Sequelize.STRING,
-    field: "PhoneNumber"
-  },
-  phoneNumberConfirmed: {
-    type: Sequelize.BOOLEAN,
-    field: "PhoneNumberConfirmed"
-  },
-  isTwoFactorEnabled: {
-    type: Sequelize.BOOLEAN,
-    field: "TwoFactorEnabled"
-  },
-  lockoutEndDateUtc: {
-    type: Sequelize.DATE,
-    field: "LockoutEndDateUtc"
-  },
-  isLockoutEnabled: {
-    type: Sequelize.BOOLEAN,
-    field: "LockoutEnabled"
-  },
-  AccessFailedCount: {
-    type: Sequelize.INTEGER,
-    field: "LockoutEnabled"
-  },
-  username: {
-    type: Sequelize.STRING,
-    field: "UserName"
-  }
-})
-
-user.sync().then(function() {
-  console.log("ok");
-}).catch(function(error) {
-  console.log(error);
-})
-user.belongsTo(HealthRecord)
-
-module.exports = user
+module.exports = function(sequelize, DataTypes) {
+    return sequelize.define('dbo.User', {
+        id: {
+            type: DataTypes.STRING,
+            field: "Id",
+            primaryKey: true
+        },
+        firstName: {
+            type: DataTypes.STRING,
+            field: "FirstName"
+        },
+        lastName: {
+            type: DataTypes.STRING,
+            field: "LastName"
+        },
+        mobileNumber: {
+            type: DataTypes.STRING,
+            field: "MobileNumber"
+        },
+        email: {
+            type: DataTypes.STRING,
+            field: "Email"
+        },
+        isEmailConfirmed: {
+            type: DataTypes.BOOLEAN,
+            field: "EmailConfirmed"
+        },
+        passwordHash: {
+            type: DataTypes.STRING,
+            field: "PasswordHash"
+        },
+        securityStamp: {
+            type: DataTypes.STRING,
+            field: "SecurityStamp"
+        },
+        phoneNumber: {
+            type: DataTypes.STRING,
+            field: "PhoneNumber"
+        },
+        phoneNumberConfirmed: {
+            type: DataTypes.BOOLEAN,
+            field: "PhoneNumberConfirmed"
+        },
+        isTwoFactorEnabled: {
+            type: DataTypes.BOOLEAN,
+            field: "TwoFactorEnabled"
+        },
+        lockoutEndDateUtc: {
+            type: DataTypes.DATE,
+            field: "LockoutEndDateUtc"
+        },
+        isLockoutEnabled: {
+            type: DataTypes.BOOLEAN,
+            field: "LockoutEnabled"
+        },
+        AccessFailedCount: {
+            type: DataTypes.INTEGER,
+            field: "LockoutEnabled"
+        },
+        username: {
+            type: DataTypes.STRING,
+            field: "UserName"
+        }
+        
+    });
+};
