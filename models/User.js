@@ -61,7 +61,10 @@ module.exports = function(sequelize, DataTypes) {
         username: {
             type: DataTypes.STRING,
             field: "UserName"
+        },
+        tokenHash: {
+          type: DataTypes.STRING,
+          field: "TokenHash"
         }
-        
     });
 };
