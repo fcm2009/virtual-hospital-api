@@ -1,0 +1,34 @@
+<RestClientRequest>
+  <option name="biscuits">
+    <list />
+  </option>
+  <option name="httpMethod" value="POST" />
+  <option name="urlBase" value="http://localhost:8080" />
+  <option name="urlPath" value="/account/view" />
+  <option name="headers">
+    <list>
+      <KeyValuePair>
+        <option name="key" value="Accept" />
+        <option name="value" value="*/*" />
+      </KeyValuePair>
+      <KeyValuePair>
+        <option name="key" value="Cache-Control" />
+        <option name="value" value="no-cache" />
+      </KeyValuePair>
+    </list>
+  </option>
+  <option name="parameters">
+    <list>
+      <KeyValuePair>
+        <option name="key" value="access_token" />
+        <option name="value" value="e2qcj8l3s7731hq26nb437671cihl9sh1oq9e55kj2rrgltg1q9bppebogrv73nbc5nhg00jgmubvvk1bcqdmcvb2q5kf3sdnp4p83tgo9v2ldcilg07entfost2vff30jaoej7dhngb25md87kd6t9v1b7p0jhl6habric509mu2rjdhd9kafciblpf6ee1rbgei5o8jfod3" />
+      </KeyValuePair>
+    </list>
+  </option>
+  <option name="parametersEnabled" value="true" />
+  <option name="haveTextToSend" value="false" />
+  <option name="haveFileToSend" value="false" />
+  <option name="isFileUpload" value="false" />
+  <option name="textToSend" value="" />
+  <option name="filesToSend" value="" />
+</RestClientRequest>

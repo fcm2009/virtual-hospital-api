@@ -1,11 +1,6 @@
 
 module.exports = function(sequelize, DataTypes) {
-    return sequelize.define('dbo.User', {
-        id: {
-            type: DataTypes.STRING,
-            field: "Id",
-            primaryKey: true
-        },
+    return sequelize.define('User', {
         firstName: {
             type: DataTypes.STRING,
             field: "FirstName"

@@ -22,6 +22,7 @@
     "hat": "git+https://github.com/substack/node-hat.git",
     "jsonwebtoken": "^5.7.0",
     "morgan": "^1.7.0",
+    "multer": "^1.1.0",
     "passport": "^0.3.2",
     "passport-http-bearer": "^1.0.1",
     "passport-local": "^1.0.0",

@@ -1,11 +1,6 @@
 
 module.exports = function(sequelize, DataTypes) {
     return sequelize.define('HealthRecords', {
-        id: {
-            type: DataTypes.STRING,
-            field: "HealthRecordId",
-            primaryKey: true
-        },
         age: {
             type: DataTypes.INTEGER,
             field: "Age"
@@ -22,7 +17,7 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.STRING,
             field: "MedicalHistory"
         },
-        ChronicDiseases: {
+        chronicDiseases: {
             type: DataTypes.STRING,
             field: "ChronicDiseases"
         }
