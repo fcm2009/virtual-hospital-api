@@ -2,6 +2,7 @@ var Sequelize = require('sequelize');
 var config = require("./config")["local"];
 
 var sequelize = new Sequelize(config.database, config.username, config.password, config);
+
 var models = [
     "User",
     "HealthRecord",

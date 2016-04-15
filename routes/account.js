@@ -31,7 +31,7 @@ router.post("/create", function(req, res) {
         res.send("Required Field Messing");
         return
     }
-    
+
     models.User.findOrCreate({
         where: {
             $or: {
@@ -65,5 +65,18 @@ router.post("/create", function(req, res) {
         //TODO: log
     })
 });
+
+router.post("/update", passport.authenticate("bearer", {session: false}), function(req, res) {
+  models.update({
+      firstName: req.user.firstName,
+      lastName: req.user.lastName,
+      email: req.user.email,
+      isEmailConfirmed: false,
+      mobileNumber: req.user.mobileNumber,
+  }).then(function() {
+    res.status(200);
+    res.send("User Information Has Been Updated Successfully")
+  }).error(function(error) {})
+})
 
 module.exports = router;
