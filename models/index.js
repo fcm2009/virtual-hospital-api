@@ -14,8 +14,11 @@ models.forEach(function (model, index, models) {
 });
 
 //relations
-module.exports["User"].belongsTo(module.exports["HealthRecord"]);
-module.exports["HealthRecord"].belongsTo(module.exports["MedicalHistory"]);
+this.User.belongsTo(this.HealthRecord);
+this.HealthRecord.belongsTo(this.MedicalHistory);
 //end of relations
 
-sequelize.sync();
+this.User.sync({force: true});
+this.HealthRecord.sync({force: true});
+this.MedicalHistory.sync({force: true});
+//sequelize.sync({force: true});

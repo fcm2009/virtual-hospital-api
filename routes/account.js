@@ -5,52 +5,35 @@ var models = require("../app").get("models");
 
 
 router.post("/view", passport.authenticate("bearer", { session: false }), function(req, res) {
-    models.User.findOne({
-        where: {
-            tokenHash: req.user.tokenHash
-        }
-    }).then(function (user) {
-        if(user) {
-            res.send({
-                username: user.username,
-                firstName: user.firstName,
-                lastName: user.lastName,
-                email: user.email,
-                mobileNumber: user.mobileNumber
-            })
-        } else {
-            res.status(404);
-            res.send("Account Is Not Found");
-        }
-    })
+    var user = req.user;
+    res.send({
+        username: user.username,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        mobileNumber: user.mobileNumber
+    });
 });
 
 router.post("/create", function(req, res) {
-    if(!req.body.email || !req.body.username || !req.body.password) {
+    var input = req.body;
+
+    if(!input.email || !input.username || !input.password) {
         res.status(400);
         res.send("Required Field Messing");
-        return
+        return;
     }
 
-    models.User.findOrCreate({
+    models.User.find({
         where: {
             $or: {
-                username: req.body.username,
-                email: req.body.email
+                username: input.username,
+                email: input.email
             }
-        },
-        defaults: {
-            username: req.body.username,
-            firstName: req.body.firstName,
-            lastName: req.body.lastName,
-            email: req.body.email,
-            mobileNumber: req.body.mobileNumber,
-            //TODO:hash password
-            passwordHash: req.body.password
         }
-    }).spread(function (user, isCreated) {
-        if(!isCreated) {
-            if(user.username === req.body.username) {
+    }).then(function (user) {
+        if(user) {
+            if(user.username === input.username) {
                 res.status(409);
                 res.send("Username Already Exist")
             } else {
@@ -58,6 +41,23 @@ router.post("/create", function(req, res) {
                 res.send("Email Already Exist")
             }
         } else {
+            models.User.create({
+                    username: input.username,
+                    firstName: input.firstName,
+                    lastName: input.lastName,
+                    email: input.email,
+                    mobileNumber: input.mobileNumber,
+                    //TODO:hash password
+                    passwordHash: input.password
+            }).then(function (user) {
+                user.setHealthRecord({
+                    age: input.age,
+                    height: input.height,
+                    weight: input.weight,
+                    chronicDiseases: input.chronicDiseases
+                })
+            });
+
             res.status(200);
             res.send("Account Created Successfully")
         }
@@ -67,16 +67,18 @@ router.post("/create", function(req, res) {
 });
 
 router.post("/update", passport.authenticate("bearer", {session: false}), function(req, res) {
-  models.update({
-      firstName: req.user.firstName,
-      lastName: req.user.lastName,
-      email: req.user.email,
-      isEmailConfirmed: false,
-      mobileNumber: req.user.mobileNumber,
-  }).then(function() {
-    res.status(200);
-    res.send("User Information Has Been Updated Successfully")
-  }).error(function(error) {})
-})
+    var input = req.body;
+    var user = req.user;
+    user.update({
+        firstName: input.firstName,
+        lastName: input.lastName,
+        email: input.email,
+        mobileNumber: input.mobileNumber,
+        isEmailConfirmed: false
+    }).then(function() {
+        res.status(200);
+        res.send("User Information Has Been Updated Successfully")
+    }).error(function(error) {})
+});
 
 module.exports = router;
