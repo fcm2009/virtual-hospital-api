@@ -6,7 +6,8 @@ var sequelize = new Sequelize(config.database, config.username, config.password,
 var models = [
     "User",
     "HealthRecord",
-    "MedicalHistory"
+    "MedicalHistory",
+    "Appointment"
 ];
 
 models.forEach(function (model, index, models) {
@@ -16,6 +17,8 @@ models.forEach(function (model, index, models) {
 //relations
 this.User.belongsTo(this.HealthRecord);
 this.HealthRecord.hasMany(this.MedicalHistory);
+this.Appointment.belongsTo(this.User, {as: "Patient"});
+this.Appointment.belongsTo(this.User, {as: "Doctor"});
 //end of relations
 
 sequelize.sync();
