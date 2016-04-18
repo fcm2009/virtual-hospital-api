@@ -18,21 +18,38 @@ router.post("/view", passport.authenticate("bearer", { session: false }), functi
 router.post("/create", function(req, res) {
     var input = req.body;
 
-    if(!input.email || !input.username || !input.password) {
+    if(!input.username || !input.email || !input.password
+        || !input.age || !input.height || !input.weight) {
         res.status(400);
         res.send("Required Field Messing");
         return;
     }
 
-    models.User.find({
+    models.User.findOrCreate({
         where: {
             $or: {
                 username: input.username,
                 email: input.email
             }
-        }
-    }).then(function (user) {
-        if(user) {
+        },
+        defaults: {
+            username: input.username,
+            firstName: input.firstName,
+            lastName: input.lastName,
+            email: input.email,
+            mobileNumber: input.mobileNumber,
+            //TODO:hash password
+            passwordHash: input.password,
+            HealthRecord: {
+                age: input.age,
+                height: input.height,
+                weight: input.weight,
+                chronicDiseases: input.chronicDiseases
+            }
+        },
+        include: models.HealthRecord
+    }).spread(function (user, isCreated) {
+        if(!isCreated) {
             if(user.username === input.username) {
                 res.status(409);
                 res.send("Username Already Exist")
@@ -41,25 +58,8 @@ router.post("/create", function(req, res) {
                 res.send("Email Already Exist")
             }
         } else {
-            models.User.create({
-                    username: input.username,
-                    firstName: input.firstName,
-                    lastName: input.lastName,
-                    email: input.email,
-                    mobileNumber: input.mobileNumber,
-                    //TODO:hash password
-                    passwordHash: input.password
-            }).then(function (user) {
-                user.setHealthRecord({
-                    age: input.age,
-                    height: input.height,
-                    weight: input.weight,
-                    chronicDiseases: input.chronicDiseases
-                })
-            });
-
             res.status(200);
-            res.send("Account Created Successfully")
+            res.send("Account Created Successfully");
         }
     }).error(function (error) {
         //TODO: log

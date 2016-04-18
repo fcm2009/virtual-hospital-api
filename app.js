@@ -15,7 +15,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(passport.initialize());
 app.use("/account", require('./routes/account'));
 app.use("/login", require('./routes/login'));
-app.use("/upload", require('./routes/upload'));
+app.use("/medicalHistory", require('./routes/medicalHistory'));
 
 passport.use("bearer", new bearerStrategy(function(access_token, done) {
     app.get("models").User.findOne({

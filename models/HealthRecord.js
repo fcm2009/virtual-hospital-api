@@ -13,10 +13,6 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.INTEGER,
             field: "Weight"
         },
-        medicalHistory: {
-            type: DataTypes.STRING,
-            field: "MedicalHistory"
-        },
         chronicDiseases: {
             type: DataTypes.STRING,
             field: "ChronicDiseases"
