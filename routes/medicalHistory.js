@@ -7,8 +7,7 @@ var models = require("../app").get("models");
 var path = require("path");
 var fs = require("fs");
 
-//TODO: enable auth
-//TODO: finalize method
+//TODO: change any to file and set filename
 router.post("/upload", passport.authenticate("bearer", { session: false }), function (req, res) {
     upload(req, res, function (err) {
         if (err) {

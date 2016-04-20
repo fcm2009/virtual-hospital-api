@@ -13,15 +13,17 @@ var models = [
 ];
 
 models.forEach(function (model, index, models) {
-    module.exports.model = sequelize.import(model);
+    module.exports[model] = sequelize.import(model);
 });
-//TOFO: fix this and chceck avaliblity and cancel
-this.model.CANCELLED = 0;
-this.model.PENDING = 1;
-this.model.CONFIRMED = 3;
 
-this.model.BOOKED = 0;
-this.model.AVAILABLE = 1;
+//status
+this.CANCELLED = 0;
+this.PENDING = 1;
+this.CONFIRMED = 2;
+
+this.AVAILABLE = 0;
+this.BOOKED = 1;
+//status
 
 //relations
 this.User.belongsTo(this.HealthRecord);

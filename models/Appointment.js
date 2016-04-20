@@ -1,7 +1,7 @@
 
 module.exports = function(sequelize, DataTypes) {
     return sequelize.define('Appointment', {
-        isAvailable: {
+        status: {
             type: DataTypes.INTEGER,
             field: "Status"
         }

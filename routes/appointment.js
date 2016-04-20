@@ -17,12 +17,14 @@ router.post("/make", passport.authenticate("bearer", {session: false}), function
                 });
                 userSlot = userSlot[0]; //only one slot can have the id the user provided, this depackge it
                 if(userSlot) {
-                    if(userSlot.isAvailable === models.AVAILABLE) {
+                    if(userSlot.status == models.AVAILABLE) {
                         models.Appointment.create({
                             status: models.Appointment.PENDING,
                             UserId: req.user.id,
                             SlotId: userSlot.id
                         }).then(function (appointment) {
+                            userSlot.status = models.BOOKED;
+                            userSlot.save();
                             res.send(appointment);
                         })
                     } else {
@@ -43,24 +45,24 @@ router.post("/make", passport.authenticate("bearer", {session: false}), function
     });
 });
 
-router.post("/cancel", passport.authenticate("bearer", {session: false}, function (req, res) {
+router.post("/cancel", passport.authenticate("bearer", {session: false}), function (req, res) {
     models.Appointment.findOne({
         where: {
             id: req.body.appointmentId
         }
     }).then(function (appointment) {
-        if(appointmentId) {
-            models.destroy(appointment);
+        if(appointment) {
+            appointment.destroy();
             res.status(200);
-            res.status("Appointment Deleted Successfully");
+            res.send("Appointment Deleted Successfully");
         } else {
             res.status(404);
-            res.status("Appointment is not Found");
+            res.send("Appointment is not Found");
         }
     }).error(function (error) {
         //TODO:log
     });
-}));
+});
 
 router.post("/listSlots", passport.authenticate("bearer", {session: false}), function (req, res) {
     models.Doctor.findAll({
