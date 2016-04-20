@@ -41,7 +41,7 @@ router.post("/upload", passport.authenticate("bearer", { session: false }), func
     });
 });
 
-router.post("/getUserMeta", passport.authenticate("bearer", {session: false}), function (req, res) {
+router.post("/list", passport.authenticate("bearer", {session: false}), function (req, res) {
     req.user.getHealthRecord().then(function(healthRecord) {
         healthRecord.getMedicalHistories().then(function (medicalHistories) {
             var ids = [];

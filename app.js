@@ -14,7 +14,7 @@ app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(passport.initialize());
 app.use("/account", require('./routes/account'));
-app.use("/login", require('./routes/login'));
+app.use("/appointment", require('./routes/appointment'));
 app.use("/medicalHistory", require('./routes/medicalHistory'));
 
 passport.use("bearer", new bearerStrategy(function(access_token, done) {
@@ -45,7 +45,6 @@ passport.use("local", new localStrategy(function (username, password, done) {
 
 app.set('views', "./tests/");
 app.set('view engine', 'jade');
-
 app.get('/', function(req, res){
     res.render('uploadTest');
 });

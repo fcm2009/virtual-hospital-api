@@ -9,7 +9,7 @@ module.exports = {
         port: 1433
     },
     local: {
-        host: "192.168.56.102",
+        host: "192.168.58.101",
         database: "VHDB",
         username: "sa",
         password: "vhdb",

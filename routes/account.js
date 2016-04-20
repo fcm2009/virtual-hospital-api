@@ -2,6 +2,7 @@ var express = require("express");
 var router = express.Router();
 var passport = require("passport");
 var models = require("../app").get("models");
+var hat = require("hat");
 
 
 router.post("/view", passport.authenticate("bearer", { session: false }), function(req, res) {
@@ -79,6 +80,18 @@ router.post("/update", passport.authenticate("bearer", {session: false}), functi
         res.status(200);
         res.send("User Information Has Been Updated Successfully")
     }).error(function(error) {})
+});
+
+router.post("/login", passport.authenticate("local", { session: false}), function(req, res) {
+    //TODO:hash token
+    var token = hat(1024, 32);
+    req.user.update({
+        tokenHash: token
+    }).then(function () {
+        res.send(token)
+    }).error(function (error) {
+        //TODO: log
+    })
 });
 
 module.exports = router;
