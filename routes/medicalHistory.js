@@ -45,7 +45,7 @@ router.post("/list", passport.authenticate("bearer", {session: false}), function
         healthRecord.getMedicalHistories().then(function (medicalHistories) {
             var ids = [];
             medicalHistories.forEach(function(medicalHistory) {
-                ids.push(medicalHistory.id);
+                ids.push({id: medicalHistory.id, title: medicalHistory.title});
             });
             res.send(ids);
         });

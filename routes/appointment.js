@@ -67,11 +67,11 @@ router.post("/cancel", passport.authenticate("bearer", {session: false}), functi
 router.post("/listSlots", passport.authenticate("bearer", {session: false}), function (req, res) {
     models.Doctor.findAll({
         where: {
-            id: req.body.id
+            id: req.body.doctorId
         }
     }).spread(function (doctor) {
         if(doctor) {
-            doctor.getSlot().then(function (slots) {
+            doctor.getSlots().then(function (slots) {
                 res.send(slots);
             });
         } else {

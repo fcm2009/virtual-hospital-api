@@ -1,5 +1,5 @@
 var Sequelize = require('sequelize');
-var config = require("./config")["local"];
+var config = require("./config");
 
 var sequelize = new Sequelize(config.database, config.username, config.password, config);
 

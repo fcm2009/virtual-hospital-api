@@ -1,5 +1,5 @@
 
-module.exports = {
+connection = {
     cloud: {
         host: "virtualhospital.database.windows.net",
         database: "virtualhospitalDB",
@@ -8,12 +8,21 @@ module.exports = {
         dialect: "mssql",
         port: 1433
     },
-    local: {
+    localMSSQL: {
         host: "192.168.58.101",
         database: "VHDB",
         username: "sa",
         password: "vhdb",
         dialect: "mssql",
         port: 1433
+    },
+    localMySql: {
+        host: "localhost",
+        database: "VHDB",
+        username: "root",
+        password: "vhdb",
+        dialect: "mysql",
+        port: 3306
     }
 };
+module.exports = connection.localMySql;
