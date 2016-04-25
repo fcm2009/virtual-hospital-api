@@ -13,9 +13,9 @@ router.post("/make", passport.authenticate("bearer", {session: false}), function
         if(doctor) {
             doctor.getSlots().then(function (slots) {
                 var userSlot = slots.filter(function (slot) {
-                    return slot.getId === req.body.id;
+                    return slot.id == req.body.slotId;
                 });
-                userSlot = userSlot[0]; //only one slot can have the id the user provided, this depackge it
+                userSlot = userSlot[0]; //only one slot can have the id the user provided, this depackage it
                 if(userSlot) {
                     if(userSlot.status == models.AVAILABLE) {
                         models.Appointment.create({
@@ -23,10 +23,17 @@ router.post("/make", passport.authenticate("bearer", {session: false}), function
                             UserId: req.user.id,
                             SlotId: userSlot.id
                         }).then(function (appointment) {
-                            userSlot.status = models.BOOKED;
-                            userSlot.save();
-                            res.send(appointment);
-                        })
+                            models.Appointment.findOne({
+                                where: {
+                                    id: appointment.id
+                                },
+                                include: [models.Slot]
+                            }).then(function (appointment) {
+                                userSlot.status = models.BOOKED;
+                                userSlot.save();
+                                res.send(appointment);
+                            });
+                        });
                     } else {
                         res.status(400);
                         res.send("Time Slot is not Available")
@@ -91,11 +98,12 @@ router.post("/listDoctors", passport.authenticate("bearer", {session: false}), f
     })
 });
 
-router.post("/listAppointments", passport.authenticate("bearer", {session: false}), function (req, res) {
+router.post("/list", passport.authenticate("bearer", {session: false}), function (req, res) {
     models.Appointment.findAll({
         where: {
             UserId: req.user.id
-        }
+        },
+        include: [models.Slot]
     }).then(function (appointments) {
         res.send(appointments)
     }).error(function (error) {
