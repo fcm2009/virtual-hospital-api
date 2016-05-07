@@ -13,6 +13,7 @@ app.set("models", require("./models/index"));
 app.use(logger('dev'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(passport.initialize());
+app.use(multer({dest: "./uploads"}).any());
 app.use("/account", require('./routes/account'));
 app.use("/appointment", require('./routes/appointment'));
 app.use("/medicalHistory", require('./routes/medicalHistory'));

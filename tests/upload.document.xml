@@ -1,0 +1,58 @@
+<RestClientRequest>
+  <option name="biscuits">
+    <list />
+  </option>
+  <option name="httpMethod" value="POST" />
+  <option name="urlBase" value="http://localhost:8080" />
+  <option name="urlPath" value="/medicalHistory/upload/" />
+  <option name="headers">
+    <list>
+      <KeyValuePair>
+        <option name="key" value="Accept" />
+        <option name="value" value="*/*" />
+      </KeyValuePair>
+      <KeyValuePair>
+        <option name="key" value="Cache-Control" />
+        <option name="value" value="no-cache" />
+      </KeyValuePair>
+      <KeyValuePair>
+        <option name="key" value="name" />
+        <option name="value" value="MedicalHistory" />
+      </KeyValuePair>
+    </list>
+  </option>
+  <option name="parameters">
+    <list>
+      <KeyValuePair>
+        <option name="key" value="username" />
+        <option name="value" value="mohammed" />
+      </KeyValuePair>
+      <KeyValuePair>
+        <option name="key" value="password" />
+        <option name="value" value="aaa" />
+      </KeyValuePair>
+      <KeyValuePair>
+        <option name="key" value="email" />
+        <option name="value" value="aaa@aaa.aaa" />
+      </KeyValuePair>
+      <KeyValuePair>
+        <option name="key" value="age" />
+        <option name="value" value="23" />
+      </KeyValuePair>
+      <KeyValuePair>
+        <option name="key" value="height" />
+        <option name="value" value="171" />
+      </KeyValuePair>
+      <KeyValuePair>
+        <option name="key" value="access_token" />
+        <option name="value" value="e7a1is247evk6k1sv7o9j4vvlua8b2qhh9pfoa1rq339of4rfmqs478pap47j0tk0ptelndeisp42qp17lipi78cjpftvq1arjbcr2g79te4ftrfd8uvfp4612j2f3pq18fu97d39qqofdmkb0tt0pai5q84dvg0knpibe2omj809b1oh8591nbuhoadcv94mee3k6gt0srd8" />
+      </KeyValuePair>
+    </list>
+  </option>
+  <option name="parametersEnabled" value="true" />
+  <option name="haveTextToSend" value="false" />
+  <option name="haveFileToSend" value="true" />
+  <option name="isFileUpload" value="true" />
+  <option name="textToSend" value="" />
+  <option name="filesToSend" value="/home/fcm2009/Templates/Text File" />
+</RestClientRequest>

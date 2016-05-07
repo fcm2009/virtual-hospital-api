@@ -45,7 +45,9 @@ router.post("/create", function(req, res) {
                 age: input.age,
                 height: input.height,
                 weight: input.weight,
-                chronicDiseases: input.chronicDiseases
+                chronicDiseases: input.chronicDiseases,
+                diabetes: input.diabetes,
+                hypertension: input.hypertension
             }
         },
         include: models.HealthRecord
@@ -76,7 +78,7 @@ router.post("/update", passport.authenticate("bearer", {session: false}), functi
         email: input.email,
         mobileNumber: input.mobileNumber,
         isEmailConfirmed: false
-    }).then(function() {
+    }).then(function(user) {
         res.status(200);
         res.send("User Information Has Been Updated Successfully")
     }).error(function(error) {})

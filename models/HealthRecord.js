@@ -13,6 +13,14 @@ module.exports = function(sequelize, DataTypes) {
             type: DataTypes.INTEGER,
             field: "Weight"
         },
+        diabetes: {
+            type: DataTypes.BOOLEAN,
+            field: "Diabetes"
+        },
+        hypertension: {
+            type: DataTypes.BOOLEAN,
+            field: "Hypertension"
+        },
         chronicDiseases: {
             type: DataTypes.STRING,
             field: "ChronicDiseases"

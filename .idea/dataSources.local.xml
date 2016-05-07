@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="dataSourceStorageLocal">
+    <data-source name="SQL Server (jTds) - VHDB@192.168.58.101" uuid="b75f4204-00d6-4ec5-8d54-4eb9dcd71c76">
+      <secret-storage>master_key</secret-storage>
+      <user-name>sa</user-name>
+    </data-source>
+    <data-source name="MySQL - VHDB@localhost" uuid="3f90abae-162f-4c49-83b1-18935e195fe1">
+      <secret-storage>master_key</secret-storage>
+      <user-name>root</user-name>
+      <schema-pattern>VHDB.*</schema-pattern>
+      <default-schemas>VHDB.*</default-schemas>
+    </data-source>
+  </component>
+</project>

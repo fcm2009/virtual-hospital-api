@@ -19,7 +19,7 @@ router.post("/make", passport.authenticate("bearer", {session: false}), function
                 if(userSlot) {
                     if(userSlot.status == models.AVAILABLE) {
                         models.Appointment.create({
-                            status: models.Appointment.PENDING,
+                            status: models.PENDING,
                             UserId: req.user.id,
                             SlotId: userSlot.id
                         }).then(function (appointment) {
@@ -56,12 +56,16 @@ router.post("/cancel", passport.authenticate("bearer", {session: false}), functi
     models.Appointment.findOne({
         where: {
             id: req.body.appointmentId
-        }
+        }, include: [models.Slot]
     }).then(function (appointment) {
         if(appointment) {
-            appointment.destroy();
-            res.status(200);
-            res.send("Appointment Deleted Successfully");
+            appointment.getSlot().then(function (slot) {
+                appointment.destroy();
+                slot.status = false;
+                slot.save();
+                res.status(200);
+                res.send("Appointment Deleted Successfully");
+            });
         } else {
             res.status(404);
             res.send("Appointment is not Found");

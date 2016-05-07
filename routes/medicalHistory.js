@@ -2,19 +2,14 @@ var express = require('express');
 var router = express.Router();
 var passport = require("passport");
 var multer = require("multer");
-var upload = multer({dest: "./uploads"}).any();
+//var upload = multer({dest: "./uploads"}).any();
 var models = require("../app").get("models");
 var path = require("path");
 var fs = require("fs");
 
 //TODO: change any to file and set filename
 router.post("/upload", passport.authenticate("bearer", { session: false }), function (req, res) {
-    upload(req, res, function (err) {
-        if (err) {
-            //TODO: log
-            res.status(403);
-            res.send("File Uploaded Failed, Try Again");
-        } else if(!req.files) {
+        if(!req.files) {
             res.status(400);
             res.send("No File Uploaded");
             return;
@@ -37,7 +32,6 @@ router.post("/upload", passport.authenticate("bearer", { session: false }), func
             res.status(200);
             res.send("File Uploaded Successfully");
         }
-    });
 });
 
 router.post("/list", passport.authenticate("bearer", {session: false}), function (req, res) {
